@@ -87,6 +87,11 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+	//adjacenttag
+	{ MODKEY,                       XK_Right,  viewnext,       {0} },
+	{ MODKEY,                       XK_Left,   viewprev,       {0} },
+	{ MODKEY|ShiftMask,             XK_Right,  tagtonext,      {0} },
+	{ MODKEY|ShiftMask,             XK_Left,   tagtoprev,      {0} },
         //nextprevtag
 	{ MODKEY,              XK_i,           view_adjacent,  { .i = +1 } },
 	{ MODKEY,              XK_u,           view_adjacent,  { .i = -1 } },
