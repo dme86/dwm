@@ -59,6 +59,8 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
+#include "nextprevtag.c"
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -85,6 +87,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+        //nextprevtag
+	{ MODKEY,              XK_i,           view_adjacent,  { .i = +1 } },
+	{ MODKEY,              XK_u,           view_adjacent,  { .i = -1 } },
+
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -112,6 +118,9 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+        //nextprevtag
+	{ ClkTagBar,            0,              Button4,        view_adjacent,     { .i = -1 } },
+	{ ClkTagBar,            0,              Button5,        view_adjacent,     { .i = +1 } },
         //awesomebar
         { ClkWinTitle,          0,              Button1,        togglewin,      {0} },
         { ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
