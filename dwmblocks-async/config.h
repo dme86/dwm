@@ -3,6 +3,7 @@
 #define CLICKABLE_BLOCKS
 
 const Block blocks[] = {
-	BLOCK("date",    1,    24),
+	BLOCK("date",    1,    23),
+	BLOCK("~/dwm/dwmblocks-async/scripts/kernel", 86400, 24),
 	BLOCK("~/dwm/dwmblocks-async/scripts/pacupdate", 3600, 25)
 };
