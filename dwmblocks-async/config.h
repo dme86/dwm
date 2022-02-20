@@ -4,5 +4,5 @@
 
 const Block blocks[] = {
 	BLOCK("date",    1,    24),
-	BLOCK("~/dwm/dwmblocks-async/scripts/pacupdate", 1, 25)
+	BLOCK("~/dwm/dwmblocks-async/scripts/pacupdate", 3600, 25)
 };
