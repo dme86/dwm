@@ -8,5 +8,5 @@ elif [ "$updates" -gt "1" ];
 then
   echo "$updates updates"
 else
-  echo "up to date"
+  echo "latest"
 fi
