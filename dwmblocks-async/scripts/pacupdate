@@ -3,10 +3,10 @@
 updates=$(checkupdates | wc -l)
 if [ $updates = "1" ];
 then
-  printf "$updates update "
+  printf "[$updates update]"
 elif [ "$updates" -gt "1" ];
 then
-  printf "$updates updates"
+  printf "[$updates updates]"
 else
-  printf "latest"
+  printf "[latest]"
 fi
