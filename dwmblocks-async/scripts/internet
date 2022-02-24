@@ -1,0 +1,13 @@
+STATUS=""
+IF=$(ip route list | grep kernel | awk '{print $3}')
+IF_NUM=$(echo "$IF" | wc -l)
+
+
+if [ $IF_NUM = "0" ];
+then
+  STATUS="no internet[!]"
+else
+  STATUS=$(echo "$IF" | paste -s -d, -)
+fi
+
+echo "$STATUS"
