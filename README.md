@@ -1,7 +1,7 @@
 
 # dwm - dynamic window manager
 
-dwm is an extremely fast, small, and dynamic tiling window manager for [X](https://www.x.org/).
+dwm is an extremely fast, small, and dynamic (tiling) window manager for [X](https://www.x.org/).
 
 ![enter image description here](https://i.imgur.com/s5LXSdd.png)
 
@@ -10,20 +10,25 @@ dwm is an extremely fast, small, and dynamic tiling window manager for [X](https
 ### Arch (btw)
 
 **Dependencies**
+
 `pacman -S base-devel git libx11 libxft xorg-server xorg-xinit libxinerama neovim ttf-meslo-nerd alacrtity pacman-contrib terminus-font`
 
 **Clone from this repo**
+
 `git clone https://github.com/dme86/dwm.git`
 
 **Modify xinit**
+
 `echo "exec dwm" > ~/.xinitrc`
 
 
 **build dwm**
+
 `cd dwm/`
 `make install`
 
 **build dwmblocks**
+
 `cd dwm/dwmblocks-async`
 `make dwmblocks`
 `make install`
