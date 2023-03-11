@@ -1,3 +1,5 @@
+#!/bin/bash
+
 STATUS=""
 IF=$(ip link show | grep "state UP" | awk '{print $2}' | sed 's/://g')
 IF_NUM=$(echo "$IF" | wc -l)
