@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Find the path of the battery device for the MX Master 3
+device_path=$(upower --dump | grep -A 6 "Wireless Mouse MX Master 3" | grep "native-path" | awk '{print $2}')
+
+# Get the battery level of the MX Master 3
+battery_level=$(upower --dump | grep -A 15 "$device_path" | grep "battery-level" | awk '{print $2}')
+battery_state=$(upower --dump | grep -A 15 "$device_path" | grep "state" | awk '{print $2}')
+
+# Only call dunst when battery_levels are low and the mouse is not charging
+if [ "$battery_level" == "low" ] && [ "$battery_state" != "discharging" ]
+then
+  dunstify "MX Master 3" "Battery Low" -u critical
+fi
