@@ -35,6 +35,34 @@
 
 Run `startx` to start dwm incl dwmblocks.
 
+## pacman hooks
+
+I've configured a `PostTransaction` [hook](https://wiki.archlinux.org/title/pacman#Hooks) on Arch:
+
+**/etc/pacman.d/hooks/dwmblocks.hook**:
+
+    [Trigger]
+    Operation = Upgrade
+    Type = Package
+    Target = *
+    
+    [Action]
+    Description = Restarting dwmblocks after upgrade...
+    When = PostTransaction
+    Exec = pkill -RTMIN+25 dwmblocks
+    
+It reloads the script inside the statusbar after `pacman -Syu`.
+To use it like this you need to configure `HookDir = /etc/pacman.d/hooks/` in your `/etc/pacman.conf`.
+
+## wallpapers
+
+My wallpapers are stored inside `$HOME/.wallpapers` - just clone them from [github](https://github.com/dme86/.wallpapers). In my setups i'm using those two lines of bash to choose an wallpaper from that folder and set it via [feh](https://github.com/derf/feh) as a background:
+
+    img=(`find ~/.wallpapers/ -name '*' -exec file {} \; | grep -o -P '^.+: \w+ image' | cut -d':' -f1`)
+    feh --bg-scale "${img[$RANDOM % ${#img[@]} ]}"
+
+It depends from where you have to call this script. On systems with a login manager i would put it inside `~/.xprofile`. If you don't use a [display manager](https://wiki.archlinux.org/title/display_manager) you can put it inside `~/.xinitrc`.
+
 ## Keybindings
 
 
@@ -44,7 +72,9 @@ Run `startx` to start dwm incl dwmblocks.
 |`Alt/Opt + p`|Open [dmenu](https://tools.suckless.org/dmenu/)|
 |`Alt/Opt +` `j` or `k`|Switch window focus|
 |`Alt/Opt + Enter`|Switches the primary window and stack|
+|`Alt/Opt + m`|Change the [layout](https://dwm.suckless.org/tutorial/) to `monocle` so the windows will be maximized|
 |`Alt/Opt + 1` or `2` or `3` or ...|Switch workspace|
 |`Shift + Alt/Opt + 1` or `2` or `3` or ...|Move active window to another workspace|
 |`Shift + Alt/Opt + c`|Close window|
 |`Alt/Opt + b`|Hide/Show titlebar|
+|`Alt/Opt +` `,` or `.`|If you are using multiple displays those commands will change the focussed monitor. I recommend [arandr](https://github.com/chrysn/arandr) if you have a multi-monitor setup.|
