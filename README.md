@@ -12,7 +12,7 @@
 
 **Dependencies**
 
-    pacman -S base-devel git dmenu libpulse playerctl dunst libx11 libxft xorg-server xorg-xinit libxinerama neovim ttf-meslo-nerd alacrtity pacman-contrib terminus-font
+    pacman -S base-devel git dmenu libpulse playerctl dunst feh libx11 libxft xorg-server xorg-xinit libxinerama neovim ttf-meslo-nerd alacrtity pacman-contrib terminus-font
 
 **Clone from this repo**
 
