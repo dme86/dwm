@@ -1,5 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
+#include <X11/XF86keysym.h>
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -75,6 +77,15 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 //static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *firefox[]  = { "firefox", NULL };
+/* volume control */
+static const char *mutecmd[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
+static const char *volupcmd[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
+static const char *voldowncmd[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
+/* media keys */
+static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
+static const char *mednextcmd[] = { "playerctl", "next", NULL };
+static const char *medprevcmd[] = { "playerctl", "previous", NULL };
+
 
 #include "nextprevtag.c"
 
@@ -114,6 +125,14 @@ static Key keys[] = {
         //nextprevtag
 	{ MODKEY,              XK_i,           view_adjacent,  { .i = +1 } },
 	{ MODKEY,              XK_u,           view_adjacent,  { .i = -1 } },
+	//volume control
+	{ 0, XF86XK_AudioMute, spawn, {.v = mutecmd } },
+	{ 0, XF86XK_AudioLowerVolume, spawn, {.v = voldowncmd } },
+	{ 0, XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
+	//Keybindings for Media play/pause/next/previous
+	{ 0, XF86XK_AudioPlay, spawn, {.v = medplaypausecmd } },
+	{ 0, XF86XK_AudioNext, spawn, {.v = mednextcmd } },
+	{ 0, XF86XK_AudioPrev, spawn, {.v = medprevcmd } },
 
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
