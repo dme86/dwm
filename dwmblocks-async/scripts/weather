@@ -1,3 +1,11 @@
 #!/bin/bash
-temp=$(curl -s 'wttr.in/?format=1' | sed 's/.* //')
-printf "[$temp]"
+
+# Get the current weather data from wttr.in
+weather=$(curl -s "https://wttr.in/?format=1")
+
+# Extract the temperature and weather icon using awk
+icon=$(echo "$weather" | awk '{print $1}')
+temperature=$(echo "$weather" | awk '{print $2}')
+
+# Echo out the temperature and weather icon
+printf "[$icon $temperature]"
