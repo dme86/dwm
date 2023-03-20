@@ -63,6 +63,10 @@ My wallpapers are stored inside `$HOME/.wallpapers` - just clone them from [gith
 
 It depends from where you have to call this script. On systems with a login manager i would put it inside `~/.xprofile`. If you don't use a [display manager](https://wiki.archlinux.org/title/display_manager) you can put it inside `~/.xinitrc`.
 
+## multi-monitor setups
+
+I often use multiple monitors and there fore [autorandr](https://github.com/phillipberndt/autorandr), which enables me to automatically hot-plug external displays.
+
 ## Keybindings
 
 
