@@ -1,3 +1,4 @@
+
 ![enter image description here](https://dwm.suckless.org/dwm.svg)
 
 # dwm - dynamic window manager
@@ -53,6 +54,49 @@ I've configured a `PostTransaction` [hook](https://wiki.archlinux.org/title/pacm
     
 It reloads the script inside the statusbar after `pacman -Syu`.
 To use it like this you need to configure `HookDir = /etc/pacman.d/hooks/` in your `/etc/pacman.conf`.
+
+## intercepting notebook charging events on arch linux with dunstify
+
+To intercept the charging event of your notebook on Arch Linux and use `dunstify` to show a notification, you can follow these steps:
+
+1. Install `acpid` if it's not already installed:
+
+		sudo pacman -S acpid
+		
+Start the `acpid` daemon and enable it to start at boot:
+
+    sudo systemctl start acpid.service
+    sudo systemctl enable acpid.service
+
+Change `/etc/acpi/handler.sh` to your needs, eg:
+
+```bash
+#!/bin/bash
+
+case "$1" in
+    ac_adapter)
+        case "$2" in
+            AC|ACAD|ADP0)
+                case "$4" in
+                    00000000)
+                        # AC adapter unplugged
+                        ;;
+                    00000001)
+                        # AC adapter plugged in
+                        DISPLAY=:0 dunstify "Notebook is charging"
+                        ;;
+                esac
+                ;;
+        esac
+        ;;
+esac
+```
+
+Reload `acpid` to apply the changes:
+
+	sudo systemctl reload acpid.service
+
+
 
 ## wallpapers
 
