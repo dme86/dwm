@@ -1,7 +1,36 @@
 #!/bin/bash
+# NEEDS: NERD-FONT! -> https://www.nerdfonts.com/font-downloads
 status=$(cat /sys/class/power_supply/BAT0/status)
-if [ "$status" = "Discharging" ];
-then
 battery=$(cat /sys/class/power_supply/BAT0/capacity)
-printf "$battery%%"
-fi
+
+case $status in
+  Discharging)
+    if (( $battery >= 80 && $battery <= 100 )); then
+      echo "󰁹"
+    elif (( $battery >= 50 && $battery <= 80 )); then
+      echo "󰁾"
+    elif (( $battery >= 20 && $battery <= 50 )); then
+      echo "󰁻"
+    elif (( $battery >= 10 && $battery <= 20 )); then
+      echo "󰁺"
+    elif (( $battery >= 5 && $battery <= 10 )); then
+      echo "󱃍"
+    fi
+    ;;
+  Charging)
+    if (( $battery >= 5 && $battery <= 10 )); then
+      echo "󰢜"
+    elif (( $battery >= 10 && $battery <= 30 )); then
+      echo "󰂇"
+    elif (( $battery >= 30 && $battery <= 50 )); then
+      echo "󰢝"
+    elif (( $battery >= 50 && $battery <= 80 )); then
+      echo "󰢞"
+    elif (( $battery >= 80 && $battery <= 100 )); then
+      echo "󰂋"
+    fi
+    ;;
+  Full)
+    echo "󰁹"
+    ;;
+esac
