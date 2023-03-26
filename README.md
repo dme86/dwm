@@ -1,4 +1,5 @@
 
+  
 ![enter image description here](https://dwm.suckless.org/dwm.svg)
 
 # dwm - dynamic window manager
@@ -17,22 +18,30 @@
 
 **Clone from this repo**
 
-    git clone https://github.com/dme86/dwm.git
+```bash
+git clone https://github.com/dme86/dwm.git
+```
 
 **Modify xinit**
 
-    echo "exec dwm" > ~/.xinitrc
+```bash
+echo "exec dwm" > ~/.xinitrc
+```
 
 **build dwm**
 
-    cd dwm/
-    make install
+```bash
+cd dwm/
+make install
+```
 
 **build dwmblocks**
 
-    cd dwm/dwmblocks-async
-    make dwmblocks
-    make install
+```bash
+cd dwm/dwmblocks-async
+make dwmblocks
+make install
+```
 
 Run `startx` to start dwm incl dwmblocks.
 
@@ -41,6 +50,7 @@ Run `startx` to start dwm incl dwmblocks.
 I've configured a `PostTransaction` [hook](https://wiki.archlinux.org/title/pacman#Hooks) on Arch:
 
 **/etc/pacman.d/hooks/dwmblocks.hook**:
+
 
     [Trigger]
     Operation = Upgrade
@@ -52,21 +62,25 @@ I've configured a `PostTransaction` [hook](https://wiki.archlinux.org/title/pacm
     When = PostTransaction
     Exec = pkill -RTMIN+25 dwmblocks
     
-It reloads the script inside the statusbar after `pacman -Syu`.
+It reloads the update indicator script inside the statusbar after `pacman -Syu`.
 To use it like this you need to configure `HookDir = /etc/pacman.d/hooks/` in your `/etc/pacman.conf`.
 
 ## intercepting notebook charging events on arch linux with dunstify
 
 To intercept the charging event of your notebook on Arch Linux and use `dunstify` to show a notification, you can follow these steps:
 
-1. Install `acpid` if it's not already installed:
+Install `acpid` if it's not already installed:
 
-		sudo pacman -S acpid
+```bash
+sudo pacman -S acpid
+```
 		
 Start the `acpid` daemon and enable it to start at boot:
 
-    sudo systemctl start acpid.service
-    sudo systemctl enable acpid.service
+```bash
+sudo systemctl start acpid.service
+sudo systemctl enable acpid.service
+```
 
 Change `/etc/acpi/handler.sh` to your needs, eg:
 
@@ -94,16 +108,19 @@ esac
 
 Reload `acpid` to apply the changes:
 
-	sudo systemctl reload acpid.service
-
+```bash
+sudo systemctl reload acpid.service
+```
 
 
 ## wallpapers
 
 My wallpapers are stored inside `$HOME/.wallpapers` - just clone them from [github](https://github.com/dme86/.wallpapers). In my setups i'm using those two lines of bash to choose an wallpaper from that folder and set it via [feh](https://github.com/derf/feh) as a background:
 
-    img=(`find ~/.wallpapers/ -name '*' -exec file {} \; | grep -o -P '^.+: \w+ image' | cut -d':' -f1`)
-    feh --bg-scale "${img[$RANDOM % ${#img[@]} ]}"
+```bash
+img=(`find ~/.wallpapers/ -name '*' -exec file {} \; | grep -o -P '^.+: \w+ image' | cut -d':' -f1`)
+feh --bg-scale "${img[$RANDOM % ${#img[@]} ]}"
+```
 
 It depends from where you have to call this script. On systems with a login manager i would put it inside `~/.xprofile`. If you don't use a [display manager](https://wiki.archlinux.org/title/display_manager) you can put it inside `~/.xinitrc`.
 
