@@ -51,6 +51,7 @@ static const Rule rules[] = {
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -116,12 +117,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
-	//adjacenttag
-	{ MODKEY,                       XK_Right,  viewnext,       {0} },
-	{ MODKEY,                       XK_Left,   viewprev,       {0} },
-	{ MODKEY|ShiftMask,             XK_Right,  tagtonext,      {0} },
-	{ MODKEY|ShiftMask,             XK_Left,   tagtoprev,      {0} },
         //nextprevtag
 	{ MODKEY,              XK_i,           view_adjacent,  { .i = +1 } },
 	{ MODKEY,              XK_u,           view_adjacent,  { .i = -1 } },
@@ -165,9 +160,5 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,              Button4,        view_adjacent,     { .i = -1 } },
 	{ ClkTagBar,            0,              Button5,        view_adjacent,     { .i = +1 } },
         //awesomebar
-        { ClkWinTitle,          0,              Button1,        togglewin,      {0} },
-        { ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
-        { ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2} },
-        { ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3} },
 
 };

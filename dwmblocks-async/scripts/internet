@@ -26,7 +26,6 @@ IF_NUM=$(echo "$IF" | wc -l)
 if [ "$IF_NUM" -eq 0 ]; then
   STATUS=""
 else
-  echo "yolo"
   print_icon "󰖩" elo
   print_icon "󰈀" enp
 fi
