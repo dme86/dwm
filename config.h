@@ -160,5 +160,8 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,              Button4,        view_adjacent,     { .i = -1 } },
 	{ ClkTagBar,            0,              Button5,        view_adjacent,     { .i = +1 } },
         //awesomebar
+	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
+        { ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
+        { ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
 
 };

@@ -929,7 +929,7 @@ getstatusbarpid()
 				return statuspid;
 		}
 	}
-	if (!(fp = popen("pidof -s "STATUSBAR, "r")))
+	if (!(fp = popen("pgrep -o "STATUSBAR, "r")))
 		return -1;
 	fgets(buf, sizeof(buf), fp);
 	pclose(fp);
