@@ -1,0 +1,5 @@
+#!/bin/bash
+
+emerge --sync > /dev/null # Sync package tree, suppress output
+num_updates=$(emerge --pretend --update --deep --newuse --verbose --quiet @world | grep -c "\[ebuild")
+echo "$num_updates updates"
