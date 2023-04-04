@@ -144,3 +144,5 @@ I often use multiple monitors and there fore [autorandr](https://github.com/phil
 |`Alt/Opt + b`|Hide/Show titlebar|
 |`Alt/Opt +` `,` or `.`|If you are using multiple displays those commands will change the focussed monitor. I recommend [arandr](https://github.com/chrysn/arandr) if you have a multi-monitor setup.|
 |`Alt/Opt + Shift + Space`|Toggle floating mode on the active window. Alt/Opt right mouse key for resizing, Alt/Opt left mouse key for moving the window|
+|`Alt/Opp +`|Increase Gap-size|
+|`Alt/Opp +`|Decrease Gap-size|
