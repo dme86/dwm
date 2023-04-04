@@ -1,11 +1,45 @@
 #!/bin/bash
 
-# Get the current weather data from wttr.in
-weather=$(curl -s "https://wttr.in/?format=1")
+# Retrieve the public IP address
+IP=$(curl -s https://api.ipify.org)
 
-# Extract the temperature and weather icon using awk
-icon=$(echo "$weather" | awk '{print $1}')
-temperature=$(echo "$weather" | awk '{print $2}')
+# Use IP geolocation API service to get the location information
+LOCATION=$(curl -s "https://ipinfo.io/${IP}/json" | jq -r '.city')
 
-# Echo out the temperature and weather icon
-printf "[$icon $temperature]"
+# Make a request to wttr.in to get the weather for $LOCATION
+WEATHER=$(curl -s "wttr.in/${LOCATION}?format=3")
+
+# Extract the weather icon and temperature from the weather information
+TEMPERATURE=$(echo "$WEATHER" | awk '{print $3}')
+ICON=$(echo $WEATHER | awk '{print $2}')
+HOUR=$(date +%H)
+
+# Change ICON depending on whether it is day or night at the moment
+if [[ "$ICON" == *"☁"* ]]; then
+  if [[ $HOUR -ge 6 ]] && [[ $HOUR -lt 20 ]]; then
+    ICO="󰖐"
+  else
+    ICO=""
+  fi
+elif [[ "$ICON" == *"☀"* ]]; then
+  if [[ $HOUR -ge 6 ]] && [[ $HOUR -lt 20 ]]; then
+    ICO="󰖙"
+  else
+    ICO=""
+  fi
+elif [[ "$ICON" == *"⛅"* ]]; then
+  if [[ $HOUR -ge 6 ]] && [[ $HOUR -lt 20 ]]; then
+    ICO="⛅"
+  else
+    ICO=""
+  fi
+elif [[ "$ICON" == *"🌨"* ]]; then
+  if [[ $HOUR -ge 6 ]] && [[ $HOUR -lt 20 ]]; then
+    ICO="󰖖"
+  else
+    ICO=""
+  fi
+fi
+
+# Print the weather icon and temperature
+printf "$ICO $TEMPERATURE"

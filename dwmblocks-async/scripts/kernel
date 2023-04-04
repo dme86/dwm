@@ -1,3 +1,7 @@
 #!/bin/bash
+case $BLOCK_BUTTON in
+        1) dunstify "hello" ;;
+esac
+
 kernelver=$(uname -r | cut -d'-' -f1)
-printf " $kernelver"
+printf " $kernelver"

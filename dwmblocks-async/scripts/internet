@@ -9,11 +9,9 @@ print_icon() {
   local pattern="$2"
   local interface=$(echo "$IF" | grep -E "^$pattern")
   if [ -n "$interface" ] && ip link show "$interface" | grep -q 'state UP'; then
-    echo "$icon"
+    printf '%s\n' "$icon"
   fi
 }
-
-
 
 # Use a variable to avoid repeating the grep pattern
 IF_PATTERN='^(wlo|enp)'
@@ -22,10 +20,9 @@ IF_PATTERN='^(wlo|enp)'
 IF=$(ip link show | awk '/state UP/ && $2 ~ pattern {print $2}' pattern="$IF_PATTERN" | sed 's/://g')
 IF_NUM=$(echo "$IF" | wc -l)
 
-
 if [ "$IF_NUM" -eq 0 ]; then
   STATUS=""
 else
-  print_icon "󰖩" elo
-  print_icon "󰈀" enp
+  print_icon "󰖩" "wlo"
+  print_icon "󰈀" "enp"
 fi
