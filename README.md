@@ -1,20 +1,34 @@
 
-  
-![enter image description here](https://dwm.suckless.org/dwm.svg)
+![dwm logo](https://dwm.suckless.org/dwm.svg)
 
 # dwm - dynamic window manager
 
-[dwm](https://dwm.suckless.org/) is an extremely fast, small, and dynamic (tiling) window manager for [X](https://www.x.org/).
+This is my version of [dwm](https://dwm.suckless.org/) - an extremely fast, small, and dynamic (tiling) window manager for [X](https://www.x.org/).
+I chose dwm over other tiling window managers because its defaults work really well for me, so I don't have to patch it much.
 
-![enter image description here](https://i.imgur.com/s5LXSdd.png)
+|Floating  | Full/Terminal |
+|--|--|
+| ![enter image description here](https://i.imgur.com/Ss6nZM1.png) |![enter image description here](https://i.imgur.com/Pp9EvNb.png)  |
+
+On the top left, you'll see my workspaces - I'm using a nerdfont to display those icons. On the top right, we have a dynamic version of "dwmblocks" that I modified to show Wi-Fi status, weather, and other informations about my system (Kernel version, upgradable Packages).
+I kept the colors simple, mostly black and grey.
+
+For me, the greatest feature of tiling window managers like dwm is the ability to modify how my windows are displayed using my keyboard - fullscreen, side by side, stacked, and even floating windows are possible. 
+See also "[keybindings](#keybindings)".
 
 ## install
+
+I would recommend having some basic knowledge of Linux before trying out dwm (or any other tiling window manager). However, the installation process is simple. I have written down a list of dependencies for my system, so if you want to use my setup, make sure you have those packages installed.
 
 ### Arch (btw)
 
 **Dependencies**
 
-    pacman -S base-devel git dmenu libpulse playerctl dunst feh libx11 libxft xorg-server xorg-xinit libxinerama neovim ttf-meslo-nerd alacrtity pacman-contrib terminus-font
+> I also use my own version of [st](https://github.com/dme86/st) (simple terminal), but you can choose
+> another one if you prefer. Just make sure you have configured it in
+> your `config.h` file accordingly.
+
+    pacman -S base-devel git dmenu libpulse playerctl dunst feh libx11 libxft xorg-server xorg-xinit libxinerama neovim ttf-meslo-nerd pacman-contrib terminus-font
 
 **Clone from this repo**
 
@@ -27,7 +41,6 @@ git clone https://github.com/dme86/dwm.git
 ```bash
 echo "exec dwm" > ~/.xinitrc
 ```
-
 **build dwm**
 
 ```bash
@@ -56,12 +69,12 @@ I've configured a `PostTransaction` [hook](https://wiki.archlinux.org/title/pacm
     Operation = Upgrade
     Type = Package
     Target = *
-    
+
     [Action]
     Description = Restarting dwmblocks after upgrade...
     When = PostTransaction
     Exec = pkill -RTMIN+25 dwmblocks
-    
+
 It reloads the update indicator script inside the statusbar after `pacman -Syu`.
 To use it like this you need to configure `HookDir = /etc/pacman.d/hooks/` in your `/etc/pacman.conf`.
 
@@ -74,7 +87,7 @@ Install `acpid` if it's not already installed:
 ```bash
 sudo pacman -S acpid
 ```
-		
+
 Start the `acpid` daemon and enable it to start at boot:
 
 ```bash
@@ -128,12 +141,13 @@ It depends from where you have to call this script. On systems with a login mana
 
 I often use multiple monitors and there fore [autorandr](https://github.com/phillipberndt/autorandr), which enables me to automatically hot-plug external displays.
 
-## Keybindings
+## keybindings
 
+I mostly use dwm defaults here because I'm used to them, and I like the workflow out of the box. However, you're free to figure out what works best for you.
 
 | Key | Description |
 |--|--|
-|`Shift + Ctrl/Strg + Enter`  |Start Terminal `alacritty`|
+|`Shift + Ctrl/Strg + Enter`  |Start Terminal [st](https://github.com/dme86/st)|
 |`Alt/Opt + p`|Open [dmenu](https://tools.suckless.org/dmenu/)|
 |`Alt/Opt +` `j` or `k`|Switch window focus|
 |`Alt/Opt + Enter`|Switches the primary window and stack|
@@ -144,5 +158,5 @@ I often use multiple monitors and there fore [autorandr](https://github.com/phil
 |`Alt/Opt + b`|Hide/Show titlebar|
 |`Alt/Opt +` `,` or `.`|If you are using multiple displays those commands will change the focussed monitor. I recommend [arandr](https://github.com/chrysn/arandr) if you have a multi-monitor setup.|
 |`Alt/Opt + Shift + Space`|Toggle floating mode on the active window. Alt/Opt right mouse key for resizing, Alt/Opt left mouse key for moving the window|
-|`Alt/Opp +`|Increase Gap-size|
-|`Alt/Opp +`|Decrease Gap-size|
+|`Alt/Opt +`|Increase Gap-size|
+|`Alt/Opt -`|Decrease Gap-size|
