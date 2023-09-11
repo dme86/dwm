@@ -150,13 +150,15 @@ I mostly use dwm defaults here because I'm used to them, and I like the workflow
 |`Shift + Ctrl/Strg + Enter`  |Start Terminal [st](https://github.com/dme86/st)|
 |`Alt/Opt + p`|Open [dmenu](https://tools.suckless.org/dmenu/)|
 |`Alt/Opt +` `j` or `k`|Switch window focus|
-|`Alt/Opt + Enter`|Switches the primary window and stack|
+|`Alt/Opt + Enter`|Switches the primary window with stack|
+|`Alt/Opt + t`|Change the [layout](https://dwm.suckless.org/tutorial/) to `tiling` (dwm default)|
 |`Alt/Opt + m`|Change the [layout](https://dwm.suckless.org/tutorial/) to `monocle` so the windows will be maximized|
+|`Alt/Opt + Shift + Space`|Toggle floating mode on the active window. Alt/Opt right mouse key for resizing, Alt/Opt left mouse key for moving the window|
+|`Alt/Opt` + `h` or `l`|Changes the ratio between the primary and stack correspondingly|
 |`Alt/Opt + 1` or `2` or `3` or ...|Switch workspace|
 |`Shift + Alt/Opt + 1` or `2` or `3` or ...|Move active window to another workspace|
 |`Shift + Alt/Opt + c`|Close window|
 |`Alt/Opt + b`|Hide/Show titlebar|
 |`Alt/Opt +` `,` or `.`|If you are using multiple displays those commands will change the focussed monitor. I recommend [arandr](https://github.com/chrysn/arandr) if you have a multi-monitor setup.|
-|`Alt/Opt + Shift + Space`|Toggle floating mode on the active window. Alt/Opt right mouse key for resizing, Alt/Opt left mouse key for moving the window|
 |`Alt/Opt +`|Increase Gap-size|
 |`Alt/Opt -`|Decrease Gap-size|
