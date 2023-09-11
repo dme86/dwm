@@ -156,6 +156,7 @@ I mostly use dwm defaults here because I'm used to them, and I like the workflow
 |`Alt/Opt + Shift + Space`|Toggle `floating` mode on the active window. `Alt/Opt` + `right mouse key` for resizing, `Alt/Opt` + `left mouse key` for moving the window|
 |`Alt/Opt` + `h` or `l`|Changes the ratio between the primary and stack correspondingly|
 |`Alt/Opt + 1` or `2` or `3` or ...|Switch workspace|
+|`Alt/Opt` + `Tab`|Switch to last used Workspace|
 |`Shift + Alt/Opt + 1` or `2` or `3` or ...|Move active window to another workspace|
 |`Shift + Alt/Opt + c`|Close window|
 |`Alt/Opt + b`|Hide/Show titlebar|
