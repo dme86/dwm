@@ -148,6 +148,8 @@ I mostly use dwm defaults here because I'm used to them, and I like the workflow
 | Key | Description |
 |--|--|
 |`Shift + Ctrl/Strg + Enter`  |Start Terminal [st](https://github.com/dme86/st)|
+|`Ctrl/Strg + w`  |Start Chromium|
+|`Ctrl/Strg + s`  |Start Slack|
 |`Alt/Opt + p`|Open [dmenu](https://tools.suckless.org/dmenu/)|
 |`Alt/Opt +` `j` or `k`|Switch window focus|
 |`Alt/Opt + Enter`|Switches the primary window with stack|
