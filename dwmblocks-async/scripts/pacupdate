@@ -1,0 +1,8 @@
+#!/bin/bash
+
+UPDATES=$(checkupdates | wc -l)
+if [[ $UPDATES -ne 0 ]]; then
+  printf "󱧕 $UPDATES"
+else
+  printf "󰏗"
+fi
