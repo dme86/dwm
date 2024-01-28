@@ -23,13 +23,13 @@ if [[ "$ICON" == *"☁"* ]]; then
   fi
 elif [[ "$ICON" == *"☀"* ]]; then
   if [[ $HOUR -ge 6 ]] && [[ $HOUR -lt 20 ]]; then
-    ICO=""
+    ICO=""
   else
     ICO=""
   fi
 elif [[ "$ICON" == *"⛅"* ]]; then
   if [[ $HOUR -ge 6 ]] && [[ $HOUR -lt 20 ]]; then
-    ICO="⛅"
+    ICO=""
   else
     ICO=""
   fi
@@ -38,6 +38,12 @@ elif [[ "$ICON" == *"🌨"* ]]; then
     ICO="󰖖"
   else
     ICO=""
+  fi
+elif [[ "$ICON" == *"⛅️"* ]]; then
+  if [[ $HOUR -ge 6 ]] && [[ $HOUR -lt 20 ]]; then
+    ICO="󰖕"
+  else
+    ICO="󰼱"
   fi
 fi
 

@@ -27,7 +27,7 @@ case $status in
     elif (( $battery >= 50 && $battery <= 80 )); then
       echo "󰢞"
     elif (( $battery >= 80 && $battery <= 100 )); then
-      echo "󰂋"
+      echo "󰂋 "
     fi
     ;;
   Full)
