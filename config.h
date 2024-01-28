@@ -8,8 +8,10 @@ static const Gap default_gap        = {.isgap = 1, .realgap = 0, .gappx = 0};
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "NotoSans Nerd Font:style=Regular:size=13" };
-static const char dmenufont[]       = "NotoSans Nerd Font:style=Regular:size=13";
+//static const char *fonts[]          = { "NotoSans Nerd Font:style=Regular:size=17" };
+static const char *fonts[]          = { "Hack Nerd Font:style=Regular:size=17" };
+//static const char dmenufont[]       = "NotoSans Nerd Font:style=Regular:pixelsize=19";
+static const char dmenufont[]       = "Hack Nerd Font:style=Regular:size=19";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
