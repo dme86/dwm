@@ -1,0 +1,9 @@
+#!/bin/sh
+
+packages=$(checkupdates | wc -l)
+if [ "$packages" -eq 0 ]; then
+  printf "󰏗"
+elif [ "$packages" -gt "0" ]; then
+  NUM=$packages
+  printf "󰏖 %s" "$packages"
+fi
