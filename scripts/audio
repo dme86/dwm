@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Get the name of the default sink
+default_sink=$(pactl get-default-sink)
+
+# Get the current mute status for the default sink
+mute_status=$(pactl get-sink-mute "$default_sink" | awk '{print $2}')
+
+# Toggle the mute status
+if [ "$mute_status" = "yes" ]; then
+    pactl set-sink-mute "$default_sink" toggle
+    notify-send 'Audio Unmuted'
+else
+    pactl set-sink-mute "$default_sink" toggle
+    notify-send 'Audio Muted'
+fi
