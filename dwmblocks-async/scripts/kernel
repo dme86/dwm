@@ -1,7 +1,20 @@
 #!/bin/bash
-case $BLOCK_BUTTON in
-        1) dunstify "hello" ;;
-esac
+#case $BLOCK_BUTTON in
+#        1) dunstify "hello" ;;
+#esac
 
-kernelver=$(uname -r | cut -d'-' -f1)
-printf " $kernelver"
+# This script compares the currently running kernel version with the installed kernel version. 
+# It echoes the current version and displays a symbol as an indicator that a reboot is recommended. 
+# This suggestion arises when a newer kernel has been installed, 
+# prompting the user to consider restarting their system for the changes to take effect
+
+INSTALLED=$(pacman -Q linux | sed 's/linux //')
+RUNNING=$(uname -r | sed 's/-ARCH//')
+KERNELVER=$(echo "$RUNNING" | cut -d'-' -f1)
+
+
+if [ "$(vercmp "$INSTALLED" "$RUNNING")" -eq 0 ]; then
+  printf " $KERNELVER"
+else
+  printf " $KERNELVER (󰓦)"
+fi

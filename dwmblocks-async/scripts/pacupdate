@@ -1,9 +1,20 @@
 #!/bin/sh
 
-packages=$(checkupdates | wc -l)
-if [ "$packages" -eq 0 ]; then
-  printf "󰏗"
-elif [ "$packages" -gt "0" ]; then
-  NUM=$packages
-  printf "󰏖 %s" "$packages"
+# This script examines whether a new kernel update is included in the available package updates. 
+# If a new kernel update is detected, it displays a package symbol accompanied by a small plus sign. 
+# Otherwise, it shows the same symbol without the plus sign, indicating that only 'normal' package updates are currently available.
+
+check=$(checkupdates)
+num_packages=$(checkupdates | wc -l)
+
+# Regex for kernel updates
+search_pattern="linux -> [0-9]+\.[0-9]+\.[0-9]+\.arch[0-9]+-[0-9]+"
+
+# Check if the search pattern (new kernel) is present in the output using grep with extended regex
+if echo "$check" | grep -Eq "$search_pattern"; then
+    printf "󱧘 %s" "$num_packages"
+elif [ "$num_packages" -eq 0 ]; then
+    printf "󰏗"
+elif [ "$num_packages" -gt 0 ]; then
+    printf "󰏖 %s" "$num_packages"
 fi
