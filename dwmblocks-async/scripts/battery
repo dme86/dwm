@@ -6,7 +6,7 @@ battery=$(cat /sys/class/power_supply/BAT0/capacity)
 case $status in
   Discharging)
     if (( $battery >= 80 && $battery <= 100 )); then
-      echo "󱊣"
+      echo "󰁹"
     elif (( $battery >= 50 && $battery <= 80 )); then
       echo "󰁾"
     elif (( $battery >= 20 && $battery <= 50 )); then
