@@ -136,6 +136,7 @@ static Key keys[] = {
 	//Keybindings for Brightness control
 	{ 0, XF86XK_MonBrightnessUp, spawn, {.v = (const char*[]){ "xbacklight", "-inc", "5", NULL } } },
 	{ 0, XF86XK_MonBrightnessDown, spawn, {.v = (const char*[]){ "xbacklight", "-dec", "5", NULL } } },
+	{ 0, XK_Print, spawn, SHCMD("/home/dan/.config/dwm/scripts/screenshot") },
 
 	
 
