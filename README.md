@@ -1,4 +1,4 @@
-
+  
 ![dwm logo](https://dwm.suckless.org/dwm.svg)
 
 # dwm - dynamic window manager
@@ -57,6 +57,24 @@ make install
 ```
 
 Run `startx` to start dwm incl dwmblocks.
+
+## patching
+
+
+The defaults of dwm suit me really well, and I only use a few patches. 
+[Patching dwm](https://dwm.suckless.org/patches/) is quite straightforward. I download the diff file into my [patch folder](https://github.com/dme86/dwm/tree/main/patches) and apply it using, for example:
+
+```bash
+patch < patches/dwm-pertag-6.2.diff
+```
+
+Usually, the patch should work [OOTB](https://en.wikipedia.org/wiki/Out_of_the_box_%28feature%29). If not, you have to fix it. If you want to remove a patch that didn't work, you can do it using, for example:
+
+```bash
+patch -R < patches/dwm-pertag-6.2.diff`
+```
+
+You need to recompile dwm after applying or removing a patch.
 
 ## pacman hooks
 
