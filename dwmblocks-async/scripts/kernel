@@ -10,8 +10,7 @@
 
 INSTALLED=$(pacman -Q linux | sed 's/linux //')
 RUNNING=$(uname -r | sed 's/-ARCH//')
-KERNELVER=$(echo "$RUNNING" | cut -d'-' -f1)
-
+KERNELVER=$(cut -d'-' -f1 <<< "$RUNNING")
 
 if [ "$(vercmp "$INSTALLED" "$RUNNING")" -eq 0 ]; then
   printf " $KERNELVER"

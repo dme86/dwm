@@ -9,9 +9,14 @@ LOCATION=$(curl -s "https://ipinfo.io/${IP}/json" | jq -r '.city')
 # Make a request to wttr.in to get the weather for $LOCATION
 WEATHER=$(curl -s "wttr.in/${LOCATION}?format=3")
 
+# Make a rewuest to wttr.in to get the times for sunrise & sunset
+SUNTIME=$(curl  -s "wttr.in/${LOCATION}?format=%S+%s")
+SUNRISE=$(awk '{print $1}' <<< "$SUNTIME")
+SUNSET=$(awk '{print $2}' <<< "$SUNTIME")
+
 # Extract the weather icon and temperature from the weather information
-TEMPERATURE=$(echo "$WEATHER" | awk '{print $3}')
-ICON=$(echo $WEATHER | awk '{print $2}')
+TEMPERATURE=$(awk '{print $3}' <<< $WEATHER)
+ICON=$(awk '{print $2}' <<< $WEATHER)
 HOUR=$(date +%H)
 
 # Change ICON depending on whether it is day or night at the moment
@@ -19,7 +24,7 @@ if [[ "$ICON" == *"☁"* ]]; then
   if [[ $HOUR -ge 6 ]] && [[ $HOUR -lt 20 ]]; then
     ICO="󰖐"
   else
-    ICO=""
+    ICO="󰼱"
   fi
 elif [[ "$ICON" == *"☀"* ]]; then
   if [[ $HOUR -ge 6 ]] && [[ $HOUR -lt 20 ]]; then
@@ -45,6 +50,10 @@ elif [[ "$ICON" == *"⛅️"* ]]; then
   else
     ICO="󰼱"
   fi
+fi
+
+if [[  "$ICO" == "" ]]; then
+  ICO="󱣶"
 fi
 
 # Print the weather icon and temperature
