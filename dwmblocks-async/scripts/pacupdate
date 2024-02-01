@@ -7,11 +7,8 @@
 check=$(checkupdates)
 num_packages=$(checkupdates | wc -l)
 
-# Regex for kernel updates
-search_pattern="linux -> [0-9]+\.[0-9]+\.[0-9]+\.arch[0-9]+-[0-9]+"
-
 # Check if the search pattern (new kernel) is present in the output using grep with extended regex
-if grep -Eq "$search_pattern" <<< "$check"; then
+if echo "$check" | awk '/linux [0-9]+\.[0-9]+\.[0-9]+\.arch[0-9]+-[0-9]+ -> [0-9]+\.[0-9]+\.[0-9]+\.arch[0-9]+-[0-9]+/ {print "Pattern found!"; exit}'; then
     printf "󱧘 %s" "$num_packages"
 elif [ "$num_packages" -eq 0 ]; then
     printf "󰏗"
