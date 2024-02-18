@@ -1,4 +1,4 @@
-  
+
 ![dwm logo](https://dwm.suckless.org/dwm.svg)
 
 # dwm - dynamic window manager
@@ -10,10 +10,12 @@ I chose dwm over other tiling window managers because its defaults work really w
 |--|--|
 | ![enter image description here](https://i.imgur.com/Ss6nZM1.png) |![enter image description here](https://i.imgur.com/Pp9EvNb.png)  |
 
-On the top left, you'll see my workspaces - I'm using a nerdfont to display those icons. On the top right, we have a dynamic version of "dwmblocks" that I modified to show Wi-Fi status, weather, and other informations about my system (Kernel version, upgradable Packages).
-I kept the colors simple, mostly black and grey.
+I am utilizing a customized iteration of dwmblocks to showcase pertinent information, including the current kernel version. 
+These scripts are both straightforward and sophisticated; an icon signals the need for a system reboot, and a small `+` icon indicates the availability of upgraded packages, particularly if there's a newer kernel version among them. 
+Additionally, the weather script employs IP-based location detection and leverages Nerd Fonts to present aesthetically pleasing glyphs.
+![enter image description here](https://i.imgur.com/OzzNp2Z.png) 
 
-For me, the greatest feature of tiling window managers like dwm is the ability to modify how my windows are displayed using my keyboard - fullscreen, side by side, stacked, and even floating windows are possible. 
+For me, the greatest feature of tiling window managers like dwm is the ability to modify how my windows are displayed using my keyboard - fullscreen, side by side, stacked, and even floating windows are possible.
 See also "[keybindings](#keybindings)".
 
 ## install
@@ -61,7 +63,7 @@ Run `startx` to start dwm incl dwmblocks.
 ## patching
 
 
-The defaults of dwm suit me really well, and I only use a few patches. 
+The defaults of dwm suit me really well, and I only use a few patches.
 [Patching dwm](https://dwm.suckless.org/patches/) is quite straightforward. I download the diff file into my [patch folder](https://github.com/dme86/dwm/tree/main/patches) and apply it using, for example:
 
 ```bash
