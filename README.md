@@ -84,7 +84,6 @@ I've configured a `PostTransaction` [hook](https://wiki.archlinux.org/title/pacm
 
 **/etc/pacman.d/hooks/dwmblocks.hook**:
 
-
     [Trigger]
     Operation = Upgrade
     Type = Package
@@ -93,7 +92,7 @@ I've configured a `PostTransaction` [hook](https://wiki.archlinux.org/title/pacm
     [Action]
     Description = Restarting dwmblocks after upgrade...
     When = PostTransaction
-    Exec = pkill -RTMIN+25 dwmblocks
+    Exec = /bin/sh -c "/usr/bin/pkill -RTMIN+25 dwmblocks && /usr/bin/pkill -RTMIN+24 dwmblocks"
 
 It reloads the update indicator script inside the statusbar after `pacman -Syu`.
 To use it like this you need to configure `HookDir = /etc/pacman.d/hooks/` in your `/etc/pacman.conf`.
