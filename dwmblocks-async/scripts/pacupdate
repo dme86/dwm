@@ -4,11 +4,11 @@
 # If a new kernel update is detected, it displays a package symbol accompanied by a small plus sign. 
 # Otherwise, it shows the same symbol without the plus sign, indicating that only 'normal' package updates are currently available.
 
-check=$(checkupdates)
+check=$(checkupdates --nocolor)
 num_packages=$(checkupdates | wc -l)
 
 # Check if the search pattern (new kernel) is present in the output using grep with extended regex
-if echo "$check" | awk '/linux [0-9]+\.[0-9]+\.[0-9]+\.arch[0-9]+-[0-9]+ -> [0-9]+\.[0-9]+\.[0-9]+\.arch[0-9]+-[0-9]+/ {print "Pattern found!"; exit}'; then
+if grep -qE "linux [0-9]+\.[0-9]+\.[0-9]+\S+ -> [0-9]+\.[0-9]+\.[0-9]+\S+" <<< "$check"; then
     printf "󱧘 %s" "$num_packages"
 elif [ "$num_packages" -eq 0 ]; then
     printf "󰏗"
