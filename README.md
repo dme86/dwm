@@ -6,14 +6,23 @@
 This is my version of [dwm](https://dwm.suckless.org/) - an extremely fast, small, and dynamic (tiling) window manager for [X](https://www.x.org/).
 I chose dwm over other tiling window managers because its defaults work really well for me, so I don't have to patch it much.
 
-|Floating  | Full/Terminal |
+| Floating | Browser/Terminal Split |
 |--|--|
-| ![enter image description here](https://i.imgur.com/Ss6nZM1.png) |![enter image description here](https://i.imgur.com/Pp9EvNb.png)  |
+| <img src="https://i.imgur.com/7qkSymp.png" width="400" height="200"> | <img src="https://i.imgur.com/KP9jTvg.png" width="400" height="200"> |
+
+| Clean | 
+|--|
+| ![enter image description here](https://i.imgur.com/UJkbTsF.png) |  
+
 
 I am utilizing a customized iteration of dwmblocks to showcase pertinent information, including the current kernel version. 
 These scripts are both straightforward and sophisticated; an icon signals the need for a system reboot, and a small `+` icon indicates the availability of upgraded packages, particularly if there's a newer kernel version among them. 
-Additionally, the weather script employs IP-based location detection and leverages Nerd Fonts to present aesthetically pleasing glyphs.
-![enter image description here](https://i.imgur.com/OzzNp2Z.png) 
+Additionally, the weather script employs IP-based location detection and leverages Nerd Fonts to present aesthetically pleasing glyphs:
+
+<div style="text-align: center;">
+  <img src="https://i.imgur.com/OzzNp2Z.png" alt="enter image description here">
+</div>
+ 
 
 For me, the greatest feature of tiling window managers like dwm is the ability to modify how my windows are displayed using my keyboard - fullscreen, side by side, stacked, and even floating windows are possible.
 See also "[keybindings](#keybindings)".
@@ -182,3 +191,4 @@ I mostly use dwm defaults here because I'm used to them, and I like the workflow
 |`Alt/Opt +` `,` or `.`|If you are using multiple displays those commands will change the focussed monitor. I recommend [arandr](https://github.com/chrysn/arandr) if you have a multi-monitor setup.|
 |`Alt/Opt +`|Increase Gap-size. `tiling` mode only|
 |`Alt/Opt -`|Decrease Gap-size. `tiling` mode only|
+
