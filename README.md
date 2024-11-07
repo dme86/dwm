@@ -39,7 +39,7 @@ I would recommend having some basic knowledge of Linux before trying out dwm (or
 > another one if you prefer. Just make sure you have configured it in
 > your `config.h` file accordingly.
 
-    pacman -S base-devel git dmenu libpulse playerctl dunst feh libx11 libxft xorg-server xorg-xinit libxinerama neovim ttf-meslo-nerd pacman-contrib terminus-font
+    pacman -S base-devel git dmenu libpulse playerctl dunst feh libx11 libxft xorg-server xorg-xinit libxinerama neovim ttf-meslo-nerd pacman-contrib terminus-font jq
 
 **Clone from this repo**
 
