@@ -20,14 +20,6 @@ static const char col_dme3[]        = "#643a3a";
 static const char col_cyan[]        = "#005577";
 static const char col_white[]       = "#ffffff";
 
-
-//static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-//	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-//	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-//};
-
-
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -40,18 +32,13 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {"alacritty", "--class", "spterm", "-o", "window.dimensions.columns=110", "-o", "window.dimensions.lines=28", NULL };
-// const char *spcmd2[] = {"alacritty", "-n", "spfm", "-g", "144x41", "-e", "ranger", NULL };
-// const char *spcmd3[] = {"keepassxc", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
-	// {"spranger",    spcmd2},
-	// {"keepassxc",   spcmd3},
 };
 
 
 /* tagging */
-//static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const char *tags[] = { "", "󰖟", "󰗹", " "};
 
 static const Rule rules[] = {
@@ -63,8 +50,6 @@ static const Rule rules[] = {
 	{ "Chromium", "chromium", "New Tab - Chromium", 1 << 1, 0, -1 },
 	{ "Chromium", "chromium", "New Incognito Tab - Chromium", 1 << 2, 0, -1 },
 	{ NULL,		  "spterm",		NULL,		SPTAG(0),		1,			 -1 },
-	{ NULL,		  "spfm",		NULL,		SPTAG(1),		1,			 -1 },
-	{ NULL,		  "keepassxc",	NULL,		SPTAG(2),		0,			 -1 },
 };
 
 /* layout(s) */
@@ -95,13 +80,12 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_gray1, "-sf", col_white, NULL };
-//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *chromium[]  = { "chromium", NULL };
 /* volume control */
-static const char *mutecmd[] = { "/home/dan/.config/dwm/scripts/audio", "mute", NULL };
-static const char *volupcmd[] = { "/home/dan/.config/dwm/scripts/audio", "up", NULL };
-static const char *voldowncmd[] = { "/home/dan/.config/dwm/scripts/audio", "down", NULL };
+static const char *mutecmd[] = { "sh", "-c", "~/.config/dwm/scripts/audio mute", NULL };
+static const char *volupcmd[] = { "sh", "-c", "~/.config/dwm/scripts/audio up", NULL };
+static const char *voldowncmd[] = { "sh", "-c", "~/.config/dwm/scripts/audio down", NULL };
 /* media keys */
 static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
 static const char *mednextcmd[] = { "playerctl", "next", NULL };
@@ -115,7 +99,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
         { MODKEY,                       XK_w,      spawn,          {.v = chromium } },
-        { MODKEY,			XK_r,	   spawn,          SHCMD("~/dwm/wifi-menu/rofi-wifi-menu.sh") },
+        { MODKEY,			XK_r,	   spawn,          SHCMD("~/.config/dwm/wifi-menu/rofi-wifi-menu.sh") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -136,8 +120,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY,      			XK_y,  	   togglescratch,  {.ui = 0 } },
-	{ MODKEY,      			XK_u,	   togglescratch,  {.ui = 1 } },
-	{ MODKEY,      			XK_x,	   togglescratch,  {.ui = 2 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -5 } },
@@ -158,7 +140,7 @@ static Key keys[] = {
 	//Keybindings for Brightness control
 	{ 0, XF86XK_MonBrightnessUp, spawn, {.v = (const char*[]){ "xbacklight", "-inc", "5", NULL } } },
 	{ 0, XF86XK_MonBrightnessDown, spawn, {.v = (const char*[]){ "xbacklight", "-dec", "5", NULL } } },
-	{ 0, XK_Print, spawn, SHCMD("/home/dan/.config/dwm/scripts/screenshot") },
+	{ 0, XK_Print, spawn, SHCMD("~/.config/dwm/scripts/screenshot") },
 
 	
 
