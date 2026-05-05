@@ -3,9 +3,9 @@
 #        1) dunstify "hello" ;;
 #esac
 
-# This script compares the currently running kernel version with the installed kernel version. 
-# It echoes the current version and displays a symbol as an indicator that a reboot is recommended. 
-# This suggestion arises when a newer kernel has been installed, 
+# This script compares the currently running kernel version with the installed kernel version.
+# It echoes the current version and displays a symbol as an indicator that a reboot is recommended.
+# This suggestion arises when a newer kernel has been installed,
 # prompting the user to consider restarting their system for the changes to take effect
 
 INSTALLED=$(pacman -Q linux | sed 's/linux //')

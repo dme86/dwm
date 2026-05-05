@@ -184,7 +184,8 @@ void signalHandler() {
 	}
 }
 
-void termHandler() {
+void termHandler(int signo) {
+	(void)signo;
 	statusContinue = 0;
 }
 

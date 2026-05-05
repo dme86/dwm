@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SINK=$(pactl get-default-sink) 
+SINK=$(pactl get-default-sink)
 
 case "$1" in
     "up")
@@ -27,4 +27,3 @@ esac
 # Optionally, display the current volume using notify-send
 VOLUME=$(pactl get-sink-volume $SINK | awk '{printf "%s", $5}')
 notify-send "Volume: $VOLUME"
-

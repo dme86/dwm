@@ -2,6 +2,7 @@
 
 #include <X11/XF86keysym.h>
 #define STATUSBAR "dwmblocks"
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const Gap default_gap        = {.isgap = 1, .realgap = 0, .gappx = 0};
@@ -13,11 +14,8 @@ static const char dmenufont[]       = "Hack Nerd Font:style=Regular:size=19";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
 static const char col_dme1[]        = "#818181";
 static const char col_dme2[]        = "#1b1515";
-static const char col_dme3[]        = "#643a3a";
-static const char col_cyan[]        = "#005577";
 static const char col_white[]       = "#ffffff";
 
 static const char *colors[][3]      = {
@@ -26,17 +24,15 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_dme2, col_dme1,  col_dme1  },
 };
 
-
 typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {"alacritty", "--class", "spterm", "-o", "window.dimensions.columns=110", "-o", "window.dimensions.lines=28", NULL };
 static Sp scratchpads[] = {
-	/* name          cmd  */
-	{"spterm",      spcmd1},
+	/* name      cmd */
+	{"spterm",  spcmd1},
 };
-
 
 /* tagging */
 static const char *tags[] = { "", "󰖟", "󰗹", " "};
@@ -46,10 +42,10 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Chromium", "chromium", "New Tab - Chromium", 1 << 1, 0, -1 },
-	{ "Chromium", "chromium", "New Incognito Tab - Chromium", 1 << 2, 0, -1 },
-	{ NULL,		  "spterm",		NULL,		SPTAG(0),		1,			 -1 },
+	/* class      instance    title                          tags mask     isfloating   monitor */
+	{ "Chromium", "chromium", "New Tab - Chromium",          1 << 1,       0,           -1 },
+	{ "Chromium", "chromium", "New Incognito Tab - Chromium", 1 << 2,      0,           -1 },
+	{ NULL,       "spterm",   NULL,                          SPTAG(0),     1,           -1 },
 };
 
 /* layout(s) */
@@ -57,6 +53,7 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+static const int refreshrate = 120;  /* refresh rate (per second) for client move/resize */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -78,28 +75,24 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_gray1, "-sf", col_white, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *chromium[]  = { "chromium", NULL };
-/* volume control */
 static const char *mutecmd[] = { "sh", "-c", "~/.config/dwm/scripts/audio mute", NULL };
 static const char *volupcmd[] = { "sh", "-c", "~/.config/dwm/scripts/audio up", NULL };
 static const char *voldowncmd[] = { "sh", "-c", "~/.config/dwm/scripts/audio down", NULL };
-/* media keys */
 static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
 static const char *mednextcmd[] = { "playerctl", "next", NULL };
 static const char *medprevcmd[] = { "playerctl", "previous", NULL };
 
-
 #include "nextprevtag.c"
 
-static Key keys[] = {
+static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-        { MODKEY,                       XK_w,      spawn,          {.v = chromium } },
-        { MODKEY,			XK_r,	   spawn,          SHCMD("~/.config/dwm/wifi-menu/rofi-wifi-menu.sh") },
+	{ MODKEY,                       XK_w,      spawn,          {.v = chromium } },
+	{ MODKEY,                       XK_r,      spawn,          SHCMD("~/.config/dwm/wifi-menu/rofi-wifi-menu.sh") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -119,31 +112,24 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY,      			XK_y,  	   togglescratch,  {.ui = 0 } },
+	{ MODKEY,                       XK_y,      togglescratch,  {.ui = 0 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -5 } },
-	{ MODKEY,                       XK_plus,  setgaps,        {.i = +5 } },
+	{ MODKEY,                       XK_plus,   setgaps,        {.i = +5 } },
 	{ MODKEY|ShiftMask,             XK_minus,  setgaps,        {.i = GAP_RESET } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = GAP_TOGGLE} },
-        //nextprevtag
-	{ MODKEY,              XK_i,           view_adjacent,  { .i = +1 } },
-	{ MODKEY,              XK_u,           view_adjacent,  { .i = -1 } },
-	//volume control
-	{ 0, XF86XK_AudioMute, spawn, {.v = mutecmd } },
-	{ 0, XF86XK_AudioLowerVolume, spawn, {.v = voldowncmd } },
-	{ 0, XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
-	//Keybindings for Media play/pause/next/previous
-	{ 0, XF86XK_AudioPlay, spawn, {.v = medplaypausecmd } },
-	{ 0, XF86XK_AudioNext, spawn, {.v = mednextcmd } },
-	{ 0, XF86XK_AudioPrev, spawn, {.v = medprevcmd } },
-	//Keybindings for Brightness control
-	{ 0, XF86XK_MonBrightnessUp, spawn, {.v = (const char*[]){ "xbacklight", "-inc", "5", NULL } } },
-	{ 0, XF86XK_MonBrightnessDown, spawn, {.v = (const char*[]){ "xbacklight", "-dec", "5", NULL } } },
-	{ 0, XK_Print, spawn, SHCMD("~/.config/dwm/scripts/screenshot") },
-
-	
-
+	{ MODKEY,                       XK_i,      view_adjacent,  {.i = +1 } },
+	{ MODKEY,                       XK_u,      view_adjacent,  {.i = -1 } },
+	{ 0,                            XF86XK_AudioMute, spawn, {.v = mutecmd } },
+	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = voldowncmd } },
+	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
+	{ 0,                            XF86XK_AudioPlay, spawn, {.v = medplaypausecmd } },
+	{ 0,                            XF86XK_AudioNext, spawn, {.v = mednextcmd } },
+	{ 0,                            XF86XK_AudioPrev, spawn, {.v = medprevcmd } },
+	{ 0,                            XF86XK_MonBrightnessUp, spawn, {.v = (const char*[]){ "xbacklight", "-inc", "5", NULL } } },
+	{ 0,                            XF86XK_MonBrightnessDown, spawn, {.v = (const char*[]){ "xbacklight", "-dec", "5", NULL } } },
+	{ 0,                            XK_Print, spawn, SHCMD("~/.config/dwm/scripts/screenshot") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -158,12 +144,11 @@ static Key keys[] = {
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
-static Button buttons[] = {
+static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
@@ -171,12 +156,9 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
-        //nextprevtag
-	{ ClkTagBar,            0,              Button4,        view_adjacent,     { .i = -1 } },
-	{ ClkTagBar,            0,              Button5,        view_adjacent,     { .i = +1 } },
-        //awesomebar
+	{ ClkTagBar,            0,              Button4,        view_adjacent,  {.i = -1 } },
+	{ ClkTagBar,            0,              Button5,        view_adjacent,  {.i = +1 } },
 	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
-        { ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
-        { ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
-
+	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
+	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
 };
